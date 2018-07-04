@@ -37,13 +37,11 @@ class App extends Component {
 				<ApolloProvider client={client}>
 					<div className="container-fluid">
 						<div className="row">
-							<div className="col-md-1">
+							<div className="col-md-2">
 								insert main side nav here
 							</div>
-							<div className="col-md-3">
-								<img src={logo} />
-							</div>
-							<div className="col-md-8">
+							<div className="col-md-10">
+								<br />
 								<SearchForm />
 							</div>
 						</div>

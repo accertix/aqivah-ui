@@ -14,9 +14,12 @@ export default class SearchForm extends Component {
 		super(props)
 
 		this.updateAcquisitionType = this.updateAcquisitionType.bind(this)
-		this.showLocations = this.showLocations.bind(this)
-		this.hideLocations = this.hideLocations.bind(this)
+		this.toggleShowLocations = this.toggleShowLocations.bind(this)
 		this.handleNumBedroomsChanged = this.handleNumBedroomsChanged.bind(this)
+		this.handlePropertyTypeChanged = this.handlePropertyTypeChanged.bind(
+			this
+		)
+		this.handleLocationChanged = this.handleLocationChanged.bind(this)
 
 		this.state = {
 			showNumBedroomsSelect: true,
@@ -33,7 +36,7 @@ export default class SearchForm extends Component {
 					name: "Legon",
 				},
 			],
-			queryLocation: "",
+			queryLocation: "Madina",
 			acquisitionTypes: ["Buy", "Rent", "Sell"],
 			queryAcquisitionType: "Buy",
 			numBedroomOptions: [
@@ -44,9 +47,9 @@ export default class SearchForm extends Component {
 				"5 Bedroom",
 				"more than 5 Bedroom",
 			],
-			queryNumBedrooms:"1 Bedroom",
+			queryNumBedrooms: "1 Bedroom",
 			propertyTypes: ["House", "Land", "Commercial Space", "Shop"],
-			queryPropertyType: "",
+			queryPropertyType: "House",
 			priceTypes: ["Around", "Below", "Above"],
 			queryPriceValue: "",
 		}
@@ -75,16 +78,32 @@ export default class SearchForm extends Component {
 		}
 	}
 
-	showLocations(event) {
-		this.setState({ showLocationsList: true })
+	toggleShowLocations(event) {
+		const currentShow = this.state.showLocationsList
+		this.setState({ showLocationsList: !currentShow })
 	}
 
-	hideLocations(event) {
-		this.setState({ showLocationsList: false })
+	handleLocationChanged(event) {
+		console.log(event.target)
+		this.setState({ queryLocation: "not Madina" })
 	}
 
-	handleNumBedroomsChanged(event){
-		this.setState({queryNumBedrooms: event.target.value})
+	handleNumBedroomsChanged(event) {
+		this.setState({ queryNumBedrooms: event.target.value })
+	}
+
+	handlePropertyTypeChanged(event) {
+		if (event.target.value != "House") {
+			this.setState({
+				queryPropertyType: event.target.value,
+				showNumBedroomsSelect: false,
+			})
+		} else {
+			this.setState({
+				queryPropertyType: event.target.value,
+				showNumBedroomsSelect: true,
+			})
+		}
 	}
 
 	render() {
@@ -112,7 +131,10 @@ export default class SearchForm extends Component {
 							return <option>{each}</option>
 						})}
 					</select>{" "}
-					<select>
+					<select
+						onChange={this.handlePropertyTypeChanged}
+						value={this.state.queryPropertyType}
+					>
 						{this.state.propertyTypes.map(each => {
 							return <option>{each}</option>
 						})}
@@ -126,8 +148,11 @@ export default class SearchForm extends Component {
 							hidden={
 								this.state.showLocationSelect ? "" : "hidden"
 							}
-							onFocus={this.showLocations}
-							onBlur={this.hideLocations}
+							type="text"
+							onFocus={this.toggleShowLocations}
+							onBlur={this.toggleShowLocations}
+							value={this.state.queryLocation}
+							onChange={this.handleLocationChanged}
 						/>
 						{", for "}
 						<select
@@ -140,21 +165,31 @@ export default class SearchForm extends Component {
 						{" GHS/US$"}
 						<input
 							type="number"
-							value="1500"
+							value={this.state.queryPriceValue}
 							hidden={this.state.showPriceValue ? "" : "hidden"}
 						/>
 					</div>
+					<br />
 					<input
 						type="button"
-						onclick={this.submitForm}
+						onClick={this.submitForm}
 						value={"Next"}
 					/>
 				</form>
-
+				<br />
 				<div hidden={this.state.showLocationsList ? "" : "hidden"}>
 					<ul>
 						{this.state.locations.map(location => {
-							return <li>{location.name}</li>
+							return (
+								<a href="">
+									<li
+										key=""
+										onClick={this.handleLocationChanged}
+									>
+										{location.name}
+									</li>
+								</a>
+							)
 						})}
 					</ul>
 				</div>
