@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import { Card, CardBody } from "mdbreact"
 import "./../css/SearchForm.css"
+import { map } from "async"
 
 /**
  * fetch locations
@@ -14,6 +15,8 @@ export default class SearchForm extends Component {
 
 		this.updateAcquisitionType = this.updateAcquisitionType.bind(this)
 		this.showLocations = this.showLocations.bind(this)
+		this.hideLocations = this.hideLocations.bind(this)
+		this.handleNumBedroomsChanged = this.handleNumBedroomsChanged.bind(this)
 
 		this.state = {
 			showNumBedroomsSelect: true,
@@ -21,6 +24,7 @@ export default class SearchForm extends Component {
 			showPriceTypes: true,
 			showPriceValue: true,
 			sellPropertySelected: false,
+			showLocationsList: false,
 			locations: [
 				{
 					name: "Madina",
@@ -40,6 +44,7 @@ export default class SearchForm extends Component {
 				"5 Bedroom",
 				"more than 5 Bedroom",
 			],
+			queryNumBedrooms:"1 Bedroom",
 			propertyTypes: ["House", "Land", "Commercial Space", "Shop"],
 			queryPropertyType: "",
 			priceTypes: ["Around", "Below", "Above"],
@@ -71,8 +76,15 @@ export default class SearchForm extends Component {
 	}
 
 	showLocations(event) {
-		alert("clicked locations")
-		event.preventDefault()
+		this.setState({ showLocationsList: true })
+	}
+
+	hideLocations(event) {
+		this.setState({ showLocationsList: false })
+	}
+
+	handleNumBedroomsChanged(event){
+		this.setState({queryNumBedrooms: event.target.value})
 	}
 
 	render() {
@@ -93,6 +105,8 @@ export default class SearchForm extends Component {
 						hidden={
 							this.state.showNumBedroomsSelect ? "" : "hidden"
 						}
+						value={this.state.queryNumBedrooms}
+						onChange={this.handleNumBedroomsChanged}
 					>
 						{this.state.numBedroomOptions.map(each => {
 							return <option>{each}</option>
@@ -108,16 +122,14 @@ export default class SearchForm extends Component {
 						hidden={this.state.sellPropertySelected ? "hidden" : ""}
 					>
 						{" in "}
-						<select
+						<input
 							hidden={
 								this.state.showLocationSelect ? "" : "hidden"
 							}
-							onclick={this.showLocations}
-						>
-							{this.state.locations.map(each => {
-								return <option>{each.name}</option>
-							})}
-						</select>, {" for "}
+							onFocus={this.showLocations}
+							onBlur={this.hideLocations}
+						/>
+						{", for "}
 						<select
 							hidden={this.state.showPriceTypes ? "" : "hidden"}
 						>
@@ -138,6 +150,14 @@ export default class SearchForm extends Component {
 						value={"Next"}
 					/>
 				</form>
+
+				<div hidden={this.state.showLocationsList ? "" : "hidden"}>
+					<ul>
+						{this.state.locations.map(location => {
+							return <li>{location.name}</li>
+						})}
+					</ul>
+				</div>
 			</div>
 		)
 	}
