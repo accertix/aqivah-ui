@@ -1,7 +1,12 @@
 import React, { Component } from "react"
+import { Query } from "react-apollo"
 import { Card, CardBody } from "mdbreact"
 import "./../css/SearchForm.css"
 import { map } from "async"
+import gql from "graphql-tag"
+import Locations from './Locations'
+
+
 
 /**
  * fetch locations
@@ -23,7 +28,6 @@ export default class SearchForm extends Component {
 		)
 		this.handleLocationChanged = this.handleLocationChanged.bind(this)
 		this.updatePrice = this.updatePrice.bind(this)
-
 
 		this.state = {
 			showNumBedroomsSelect: true,
@@ -87,8 +91,11 @@ export default class SearchForm extends Component {
 	// 	this.setState({ showLocationsList: !currentShow })
 	// }
 
-	hideLocations(event){
-		this.setState({showLocationsList: false, queryLocation: event.target.value})		
+	hideLocations(event) {
+		this.setState({
+			showLocationsList: false,
+			queryLocation: event.target.value,
+		})
 	}
 
 	handleLocationChanged(event) {
@@ -113,9 +120,9 @@ export default class SearchForm extends Component {
 		}
 	}
 
-	updatePrice(event){
+	updatePrice(event) {
 		this.setState({
-			queryPriceValue: event.target.value
+			queryPriceValue: event.target.value,
 		})
 	}
 
@@ -123,6 +130,7 @@ export default class SearchForm extends Component {
 		return (
 			<div>
 				<form className="form">
+					<Locations />
 					{"I’d like to "}
 					<select
 						value={this.state.queryAcquisitionType}
@@ -162,7 +170,6 @@ export default class SearchForm extends Component {
 								this.state.showLocationSelect ? "" : "hidden"
 							}
 							type="text"
-							
 							value={this.state.queryLocation}
 							onChange={this.handleLocationChanged}
 						>
@@ -194,7 +201,7 @@ export default class SearchForm extends Component {
 					/>
 				</form>
 				<br />
-				//todo: if this isn't needed by august, delete
+				{/**todo: if this isn't needed by august, delete**/}
 				<div hidden={this.state.showLocationsList ? "" : "hidden"}>
 					<ul>
 						{this.state.locations.map(location => {
