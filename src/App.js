@@ -23,9 +23,8 @@ import Locations from "./components/Locations"
  *  : result details, with pane to easily tap, to get back to results.
  */
 const cache = new InMemoryCache()
-const link = new HttpLink()
+const link = new HttpLink({ uri: "http://localhost:4000/graphql" })
 const client = new ApolloClient({
-	uri: "https://w5xlvm3vzz.lp.gql.zone/graphql",
 	link,
 	cache,
 })

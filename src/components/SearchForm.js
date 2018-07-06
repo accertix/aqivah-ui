@@ -130,7 +130,7 @@ export default class SearchForm extends Component {
 		return (
 			<div>
 				<form className="form">
-					<Locations />
+					
 					{"I’d like to "}
 					<select
 						value={this.state.queryAcquisitionType}
@@ -173,9 +173,10 @@ export default class SearchForm extends Component {
 							value={this.state.queryLocation}
 							onChange={this.handleLocationChanged}
 						>
-							{this.state.locations.map(location => {
+							<Locations />
+							{/* {this.state.locations.map(location => {
 								return <option>{location.name}</option>
-							})}
+							})} */}
 						</select>
 						{", for "}
 						<select
