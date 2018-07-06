@@ -14,7 +14,9 @@ export default class SearchForm extends Component {
 		super(props)
 
 		this.updateAcquisitionType = this.updateAcquisitionType.bind(this)
-		this.toggleShowLocations = this.toggleShowLocations.bind(this)
+		// this.toggleShowLocations = this.toggleShowLocations.bind(this)
+		this.hideLocations = this.hideLocations.bind(this)
+		// this.showLocations = this.showLocations.bind(this)
 		this.handleNumBedroomsChanged = this.handleNumBedroomsChanged.bind(this)
 		this.handlePropertyTypeChanged = this.handlePropertyTypeChanged.bind(
 			this
@@ -78,9 +80,13 @@ export default class SearchForm extends Component {
 		}
 	}
 
-	toggleShowLocations(event) {
-		const currentShow = this.state.showLocationsList
-		this.setState({ showLocationsList: !currentShow })
+	// toggleShowLocations(event) {
+	// 	const currentShow = this.state.showLocationsList
+	// 	this.setState({ showLocationsList: !currentShow })
+	// }
+
+	hideLocations(event){
+		this.setState({showLocationsList: false, queryLocation: event.target.value})		
 	}
 
 	handleLocationChanged(event) {
