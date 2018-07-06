@@ -22,6 +22,8 @@ export default class SearchForm extends Component {
 			this
 		)
 		this.handleLocationChanged = this.handleLocationChanged.bind(this)
+		this.updatePrice = this.updatePrice.bind(this)
+
 
 		this.state = {
 			showNumBedroomsSelect: true,
@@ -53,7 +55,7 @@ export default class SearchForm extends Component {
 			propertyTypes: ["House", "Land", "Commercial Space", "Shop"],
 			queryPropertyType: "House",
 			priceTypes: ["Around", "Below", "Above"],
-			queryPriceValue: "",
+			queryPriceValue: 500,
 		}
 	}
 
@@ -90,8 +92,7 @@ export default class SearchForm extends Component {
 	}
 
 	handleLocationChanged(event) {
-		console.log(event.target)
-		this.setState({ queryLocation: "not Madina" })
+		this.setState({ queryLocation: event.target.value })
 	}
 
 	handleNumBedroomsChanged(event) {
@@ -110,6 +111,12 @@ export default class SearchForm extends Component {
 				showNumBedroomsSelect: true,
 			})
 		}
+	}
+
+	updatePrice(event){
+		this.setState({
+			queryPriceValue: event.target.value
+		})
 	}
 
 	render() {
@@ -150,16 +157,19 @@ export default class SearchForm extends Component {
 						hidden={this.state.sellPropertySelected ? "hidden" : ""}
 					>
 						{" in "}
-						<input
+						<select
 							hidden={
 								this.state.showLocationSelect ? "" : "hidden"
 							}
 							type="text"
-							onFocus={this.toggleShowLocations}
-							onBlur={this.toggleShowLocations}
+							
 							value={this.state.queryLocation}
 							onChange={this.handleLocationChanged}
-						/>
+						>
+							{this.state.locations.map(location => {
+								return <option>{location.name}</option>
+							})}
+						</select>
 						{", for "}
 						<select
 							hidden={this.state.showPriceTypes ? "" : "hidden"}
@@ -173,6 +183,7 @@ export default class SearchForm extends Component {
 							type="number"
 							value={this.state.queryPriceValue}
 							hidden={this.state.showPriceValue ? "" : "hidden"}
+							onChange={this.updatePrice}
 						/>
 					</div>
 					<br />
@@ -183,6 +194,7 @@ export default class SearchForm extends Component {
 					/>
 				</form>
 				<br />
+				//todo: if this isn't needed by august, delete
 				<div hidden={this.state.showLocationsList ? "" : "hidden"}>
 					<ul>
 						{this.state.locations.map(location => {
