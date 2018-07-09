@@ -6,6 +6,7 @@ import { map } from "async"
 import gql from "graphql-tag"
 import Locations from "./Locations"
 import Properties from "./Properties"
+import { Link } from "react-router-dom"
 
 /**
  * fetch locations
@@ -22,9 +23,7 @@ export default class SearchForm extends Component {
 		this.hideLocations = this.hideLocations.bind(this)
 		// this.showLocations = this.showLocations.bind(this)
 		this.handleNumBedroomsChanged = this.handleNumBedroomsChanged.bind(this)
-		this.handlePropertyTypeChanged = this.handlePropertyTypeChanged.bind(
-			this
-		)
+		this.handlePropertyTypeChanged = this.handlePropertyTypeChanged.bind(this)
 		this.handleLocationChanged = this.handleLocationChanged.bind(this)
 		this.updatePrice = this.updatePrice.bind(this)
 
@@ -140,9 +139,7 @@ export default class SearchForm extends Component {
 					</select>
 					{" a "}
 					<select
-						hidden={
-							this.state.showNumBedroomsSelect ? "" : "hidden"
-						}
+						hidden={this.state.showNumBedroomsSelect ? "" : "hidden"}
 						value={this.state.queryNumBedrooms}
 						onChange={this.handleNumBedroomsChanged}
 					>
@@ -159,14 +156,10 @@ export default class SearchForm extends Component {
 						})}
 					</select>
 					<br />
-					<div
-						hidden={this.state.sellPropertySelected ? "hidden" : ""}
-					>
+					<div hidden={this.state.sellPropertySelected ? "hidden" : ""}>
 						{" in "}
 						<select
-							hidden={
-								this.state.showLocationSelect ? "" : "hidden"
-							}
+							hidden={this.state.showLocationSelect ? "" : "hidden"}
 							type="text"
 							value={this.state.queryLocation}
 							onChange={this.handleLocationChanged}
@@ -177,9 +170,7 @@ export default class SearchForm extends Component {
 							})} */}
 						</select>
 						{", for "}
-						<select
-							hidden={this.state.showPriceTypes ? "" : "hidden"}
-						>
+						<select hidden={this.state.showPriceTypes ? "" : "hidden"}>
 							{this.state.priceTypes.map(each => {
 								return <option>{each}</option>
 							})}
@@ -193,11 +184,9 @@ export default class SearchForm extends Component {
 						/>
 					</div>
 					<br />
-					<input
-						type="button"
-						onClick={this.submitForm}
-						value={"Next"}
-					/>
+					<Link to="/">
+						<input type="button" onClick={this.submitForm} value={"Next"} />
+					</Link>
 				</form>
 				<br />
 				{/**todo: if this isn't needed by august, delete**/}
@@ -206,10 +195,7 @@ export default class SearchForm extends Component {
 						{this.state.locations.map(location => {
 							return (
 								<a href="">
-									<li
-										key=""
-										onClick={this.handleLocationChanged}
-									>
+									<li key="" onClick={this.handleLocationChanged}>
 										{location.name}
 									</li>
 								</a>
@@ -217,7 +203,6 @@ export default class SearchForm extends Component {
 						})}
 					</ul>
 				</div>
-				<Properties />
 			</div>
 		)
 	}
