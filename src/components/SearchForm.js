@@ -4,9 +4,8 @@ import { Card, CardBody } from "mdbreact"
 import "./../css/SearchForm.css"
 import { map } from "async"
 import gql from "graphql-tag"
-import Locations from './Locations'
-
-
+import Locations from "./Locations"
+import Properties from "./Properties"
 
 /**
  * fetch locations
@@ -130,7 +129,6 @@ export default class SearchForm extends Component {
 		return (
 			<div>
 				<form className="form">
-					
 					{"I’d like to "}
 					<select
 						value={this.state.queryAcquisitionType}
@@ -219,6 +217,7 @@ export default class SearchForm extends Component {
 						})}
 					</ul>
 				</div>
+				<Properties />
 			</div>
 		)
 	}
