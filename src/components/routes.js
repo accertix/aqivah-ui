@@ -9,15 +9,16 @@ import SearchForm from "./SearchForm"
 import QueryResults from "./PropertiesFix"
 import ResultDetails from "./ResultDetails"
 import Error from "./Error"
+import PATHS from "./pathConstants"
 
 const Routes = () => {
 	return (
 		<Router>
 			<div>
 				<Switch>
-					<Route exact path="/" component={SearchForm} />
-					<Route path="/search_results" component={QueryResults} />
-                    <Route path="/search_results/:id" component={ResultDetails} />
+					<Route exact path={PATHS.HOME} component={SearchForm} />
+					<Route path={PATHS.SEARCH_RESULTS} component={QueryResults} />
+					<Route path={PATHS.SEARCH_RESULT_DETAILS} component={ResultDetails} />
 					<Route component={Error} />
 				</Switch>
 			</div>

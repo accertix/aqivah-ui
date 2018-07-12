@@ -7,6 +7,7 @@ import gql from "graphql-tag"
 import Locations from "./Locations"
 import { Link } from "react-router-dom"
 import { QueryResults } from "./queries"
+import PATHS from './pathConstants'
 
 //todo: send state values in array to db, so admin can easily update.
 
@@ -172,7 +173,7 @@ export default class SearchForm extends Component {
 					<br />
 					<Link
 						to={{
-							pathname: "/search_results",
+							pathname: PATHS.SEARCH_RESULTS,
 							state: {
 								acqType: this.state.queryAcquisitionType,
 								numBedrooms: this.state.queryNumBedrooms,

@@ -2,6 +2,8 @@ import React, { Component } from "react"
 import { Query } from "react-apollo"
 import gql from "graphql-tag"
 import { View, Mask } from "mdbreact"
+import {Link} from 'react-router-dom'
+import PATHS from './pathConstants'
 
 export default class SearchResults extends Component {
 	constructor(props) {
@@ -79,11 +81,20 @@ export default class SearchResults extends Component {
 
 					return data.PropertiesSearch.map(property => {
 						return (
-							<View>
-								<img src="https://mdbootstrap.com/img/Photos/Others/nature-sm.jpg" />
-								<div>{property.title}</div>
-								<Mask />
-							</View>
+							<Link
+								to={{
+									pathname: `${PATHS.SEARCH_RESULTS}/${property.id}`,
+									state: {
+										currentProperty: property,
+									},
+								}}
+							>
+								<View>
+									<img src="https://mdbootstrap.com/img/Photos/Others/nature-sm.jpg" />
+									<div>{property.title}</div>
+									<Mask />
+								</View>
+							</Link>
 						)
 					})
 				}}
