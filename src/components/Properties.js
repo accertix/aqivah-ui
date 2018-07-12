@@ -33,15 +33,15 @@ const GET_PROPERTIES = gql`
 	}
 `
 
-const {
-	acqType,
-	numBedrooms,
-	location,
-	propertyType,
-	priceType,
-	price,
-	...props
-} = this.props.location.state
+// const {
+// 	acqType,
+// 	numBedrooms,
+// 	location,
+// 	propertyType,
+// 	priceType,
+// 	price,
+// 	...props
+// } = this.props.location.state
 
 
 

@@ -45,7 +45,7 @@ export default class SearchForm extends Component {
 			],
 
 			queryAcquisitionType: "Buy",
-			queryNumBedrooms: "1 Bedroom",
+			queryNumBedrooms: 1,
 			queryPropertyType: "House",
 			queryPriceType: "Around",
 			queryLocation: "Madina",
