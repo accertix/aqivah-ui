@@ -5,7 +5,6 @@ import "./../css/SearchForm.css"
 import { map } from "async"
 import gql from "graphql-tag"
 import Locations from "./Locations"
-import Properties from "./Properties"
 import { Link } from "react-router-dom"
 import { QueryResults } from "./queries"
 

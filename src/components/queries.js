@@ -1,5 +1,5 @@
 import React from 'react'
-import Properties from './Properties'
+import Properties from './PropertiesFix'
 
 
 /**main query to search for properties */

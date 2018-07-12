@@ -12,7 +12,6 @@ import { HttpLink } from "apollo-link-http"
 import { ApolloProvider } from "react-apollo"
 import Locations from "./components/Locations"
 import { BrowserRouter as Router, NavLink } from "react-router-dom"
-import Properties from './components/Properties'
 import Routes from './components/routes'
 
 /**
