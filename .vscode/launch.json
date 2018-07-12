@@ -5,6 +5,16 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch via NPM",
+            "runtimeExecutable": "npm run start",
+            "runtimeArgs": [
+                "run-script",
+            ],
+            "port": 9229
+        },
+        {
             "type": "chrome",
             "request": "launch",
             "name": "Launch Chrome",

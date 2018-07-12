@@ -7,12 +7,9 @@ import gql from "graphql-tag"
 import Locations from "./Locations"
 import Properties from "./Properties"
 import { Link } from "react-router-dom"
+import { QueryResults } from "./queries"
 
-/**
- * fetch locations
- * take the user's query
- *
- */
+//todo: send state values in array to db, so admin can easily update.
 
 export default class SearchForm extends Component {
 	constructor(props) {
@@ -26,6 +23,7 @@ export default class SearchForm extends Component {
 		this.handlePropertyTypeChanged = this.handlePropertyTypeChanged.bind(this)
 		this.handleLocationChanged = this.handleLocationChanged.bind(this)
 		this.updatePrice = this.updatePrice.bind(this)
+		// this.queryProperties = this.queryProperties.bind(this)
 
 		this.state = {
 			showNumBedroomsSelect: true,
@@ -34,17 +32,9 @@ export default class SearchForm extends Component {
 			showPriceValue: true,
 			sellPropertySelected: false,
 			showLocationsList: false,
-			locations: [
-				{
-					name: "Madina",
-				},
-				{
-					name: "Legon",
-				},
-			],
-			queryLocation: "Madina",
+			priceTypes: ["Around", "Below", "Above"],
 			acquisitionTypes: ["Buy", "Rent", "Sell"],
-			queryAcquisitionType: "Buy",
+			propertyTypes: ["House", "Land", "Commercial Space", "Shop"],
 			numBedroomOptions: [
 				"1 Bedroom",
 				"2 Bedroom",
@@ -53,10 +43,12 @@ export default class SearchForm extends Component {
 				"5 Bedroom",
 				"more than 5 Bedroom",
 			],
+
+			queryAcquisitionType: "Buy",
 			queryNumBedrooms: "1 Bedroom",
-			propertyTypes: ["House", "Land", "Commercial Space", "Shop"],
 			queryPropertyType: "House",
-			priceTypes: ["Around", "Below", "Above"],
+			queryPriceType: "Around",
+			queryLocation: "Madina",
 			queryPriceValue: 500,
 		}
 	}
@@ -83,11 +75,6 @@ export default class SearchForm extends Component {
 			})
 		}
 	}
-
-	// toggleShowLocations(event) {
-	// 	const currentShow = this.state.showLocationsList
-	// 	this.setState({ showLocationsList: !currentShow })
-	// }
 
 	hideLocations(event) {
 		this.setState({
@@ -164,7 +151,7 @@ export default class SearchForm extends Component {
 							value={this.state.queryLocation}
 							onChange={this.handleLocationChanged}
 						>
-							<Locations />
+							<Locations onChange={this.handleLocationChanged} />
 							{/* {this.state.locations.map(location => {
 								return <option>{location.name}</option>
 							})} */}
@@ -184,25 +171,22 @@ export default class SearchForm extends Component {
 						/>
 					</div>
 					<br />
-					<Link to="/">
+					<Link
+						to={{
+							pathname: "/search_results",
+							state: {
+								acqType: this.state.queryAcquisitionType,
+								numBedrooms: this.state.queryNumBedrooms,
+								propertyType: this.state.queryPropertyType,
+								priceType: this.state.queryPriceType,
+								location: this.state.queryLocation,
+								price: this.state.queryPriceValue,
+							},
+						}}
+					>
 						<input type="button" onClick={this.submitForm} value={"Next"} />
 					</Link>
 				</form>
-				<br />
-				{/**todo: if this isn't needed by august, delete**/}
-				<div hidden={this.state.showLocationsList ? "" : "hidden"}>
-					<ul>
-						{this.state.locations.map(location => {
-							return (
-								<a href="">
-									<li key="" onClick={this.handleLocationChanged}>
-										{location.name}
-									</li>
-								</a>
-							)
-						})}
-					</ul>
-				</div>
 			</div>
 		)
 	}

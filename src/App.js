@@ -11,8 +11,9 @@ import { InMemoryCache } from "apollo-cache-inmemory"
 import { HttpLink } from "apollo-link-http"
 import { ApolloProvider } from "react-apollo"
 import Locations from "./components/Locations"
-import { BrowserRouter as Router, Link } from "react-router-dom"
+import { BrowserRouter as Router, NavLink } from "react-router-dom"
 import Properties from './components/Properties'
+import Routes from './components/routes'
 
 /**
  * loading page: all white, with aqivah, all caps, words spaced out, and colors changing between the 4.
@@ -42,8 +43,7 @@ class App extends Component {
 								<div className="col-md-2">insert main side nav here</div>
 								<div className="col-md-10">
 									<br />
-									{/*<SearchForm /> */}
-									<Properties />
+									<Routes />
 								</div>
 							</div>
 						</div>
