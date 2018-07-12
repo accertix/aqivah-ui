@@ -33,7 +33,7 @@ const GET_PROPERTIES = gql`
 	}
 `
 
-/**const {
+const {
 	acqType,
 	numBedrooms,
 	location,
@@ -43,9 +43,9 @@ const GET_PROPERTIES = gql`
 	...props
 } = this.props.location.state
 
-**/
 
-const Properties = ({acqType, numBedrooms, location, price, propertyType, priceType, ...props} = this.props.location.state) => (
+
+const Properties = (acqType, numBedrooms, location, propertyType, priceType, price) => (
 	<Query
 		query={GET_PROPERTIES}
 		variables={{
@@ -60,6 +60,7 @@ const Properties = ({acqType, numBedrooms, location, price, propertyType, priceT
 		{({ loading, error, data }) => {
 			console.log(error)
 			console.log(loading)
+			console.log(data)
 			if (loading) return "loading"
 			if (error) return "error"
 
