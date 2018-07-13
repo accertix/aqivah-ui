@@ -25,6 +25,7 @@ export default class SearchResults extends Component {
 	}
 
 	render() {
+		//create single source of truth for all queries, which can then be imported and used.
 		const GET_PROPERTIES = gql`
 			query properties(
 				$acqType: String!
@@ -86,6 +87,7 @@ export default class SearchResults extends Component {
 									pathname: `${PATHS.SEARCH_RESULTS}/${property.id}`,
 									state: {
 										currentProperty: property,
+										queryValues: this.state
 									},
 								}}
 							>

@@ -17,7 +17,7 @@ const Routes = () => {
 			<div>
 				<Switch>
 					<Route exact path={PATHS.HOME} component={SearchForm} />
-					<Route path={PATHS.SEARCH_RESULTS} component={QueryResults} />
+					<Route exact path={PATHS.SEARCH_RESULTS} component={QueryResults} />
 					<Route path={PATHS.SEARCH_RESULT_DETAILS} component={ResultDetails} />
 					<Route component={Error} />
 				</Switch>

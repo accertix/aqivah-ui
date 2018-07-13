@@ -9,13 +9,19 @@ export default class ResultDetails extends React.Component{
         this.state = {
             //store all properties, and store current property.
             //pass all props to the bar that pops the modal up. on selection, update the current property.
+            currentProperty: this.props.location.state.currentProperty,
+
+            queryValues: this.props.location.state.queryValues
         }
 
     }
 
     render(){
+        const {id} = this.props.match.params
         return(
         <div>
+            {id}
+            
             <br />bar that links to modal showing all property details
             <br /> <br />Display property details here 
             <br /> carousel of images
