@@ -2,28 +2,35 @@ import React, { Component } from "react"
 import { Query } from "react-apollo"
 import gql from "graphql-tag"
 import { View, Mask } from "mdbreact"
-import {Link} from 'react-router-dom'
-import PATHS from './pathConstants'
+import { Link } from "react-router-dom"
+import PATHS from "./pathConstants"
 
 export default class SearchResults extends Component {
 	constructor(props) {
 		super(props)
+		console.log("properties fix")
+		console.log(props)
 
-		this.state = {
-			acqType: this.props.location.state.acqType,
-			numBedrooms: this.props.location.state.numBedrooms,
-			location: this.props.location.state.location,
-			price: this.props.location.state.price,
-			propertyType: this.props.location.state.propertyType,
-			priceType: this.props.location.state.priceType,
+		//values are stored in props.location.state when coming from search form, but are stored in props when coming from resultsQuickAccessBar. this unifies both
+		this.queryValues = this.props.location.state
+			? this.props.location.state
+			: this.props
+		console.log("fresh query values")
+		console.log(this.queryValues)
+
+		this.properties = {
+			acqType: this.queryValues.acqType,
+			numBedrooms: this.queryValues.numBedrooms,
+			location: this.queryValues.location,
+			price: this.queryValues.price,
+			propertyType: this.queryValues.propertyType,
+			priceType: this.queryValues.priceType,
 			searchResults: [],
 		}
+		console.log(this.properties)
 	}
 
-	componentWillMount() {
-		//run the query, and populate properties obj with result.
-	}
-
+	
 	render() {
 		//create single source of truth for all queries, which can then be imported and used.
 		const GET_PROPERTIES = gql`
@@ -62,7 +69,7 @@ export default class SearchResults extends Component {
 			propertyType,
 			priceType,
 			...props
-		} = this.state
+		} = this.properties
 
 		return (
 			<Query
@@ -87,7 +94,7 @@ export default class SearchResults extends Component {
 									pathname: `${PATHS.SEARCH_RESULTS}/${property.id}`,
 									state: {
 										currentProperty: property,
-										queryValues: this.state
+										queryValues: this.properties,
 									},
 								}}
 							>

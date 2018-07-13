@@ -175,6 +175,7 @@ export default class SearchForm extends Component {
 						to={{
 							pathname: PATHS.SEARCH_RESULTS,
 							state: {
+								
 								acqType: this.state.queryAcquisitionType,
 								numBedrooms: this.state.queryNumBedrooms,
 								propertyType: this.state.queryPropertyType,
