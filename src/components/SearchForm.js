@@ -7,7 +7,8 @@ import gql from "graphql-tag"
 import Locations from "./Locations"
 import { Link } from "react-router-dom"
 import { QueryResults } from "./queries"
-import PATHS from './pathConstants'
+import PATHS from "./pathConstants"
+import SearchButton from "./SearchButton"
 
 //todo: send state values in array to db, so admin can easily update.
 
@@ -34,14 +35,14 @@ export default class SearchForm extends Component {
 			showLocationsList: false,
 			priceTypes: ["Around", "Below", "Above"],
 			acquisitionTypes: ["Buy", "Rent", "Sell"],
-			propertyTypes: ["House", "Land", "Commercial Space", "Shop"],
+			propertyTypes: ["House", "Land", "Office", "Shop"],
 			numBedroomOptions: [
 				"1 Bedroom",
 				"2 Bedroom",
 				"3 Bedroom",
 				"4 Bedroom",
 				"5 Bedroom",
-				"more than 5 Bedroom",
+				"6+ Bedroom",
 			],
 
 			queryAcquisitionType: "Buy",
@@ -115,78 +116,73 @@ export default class SearchForm extends Component {
 		return (
 			<div>
 				<form className="form">
-					{"I’d like to "}
-					<select
-						value={this.state.queryAcquisitionType}
-						onChange={this.updateAcquisitionType}
-					>
-						{this.state.acquisitionTypes.map(each => {
-							return <option>{each}</option>
-						})}
-					</select>
-					{" a "}
-					<select
-						hidden={this.state.showNumBedroomsSelect ? "" : "hidden"}
-						value={this.state.queryNumBedrooms}
-						onChange={this.handleNumBedroomsChanged}
-					>
-						{this.state.numBedroomOptions.map(each => {
-							return <option>{each}</option>
-						})}
-					</select>{" "}
-					<select
-						onChange={this.handlePropertyTypeChanged}
-						value={this.state.queryPropertyType}
-					>
-						{this.state.propertyTypes.map(each => {
-							return <option>{each}</option>
-						})}
-					</select>
-					<br />
-					<div hidden={this.state.sellPropertySelected ? "hidden" : ""}>
-						{" in "}
+					<h1>
+						{"I’d like to "}
 						<select
-							hidden={this.state.showLocationSelect ? "" : "hidden"}
-							type="text"
-							value={this.state.queryLocation}
-							onChange={this.handleLocationChanged}
+							value={this.state.queryAcquisitionType}
+							onChange={this.updateAcquisitionType}
 						>
-							<Locations onChange={this.handleLocationChanged} />
-							{/* {this.state.locations.map(location => {
-								return <option>{location.name}</option>
-							})} */}
-						</select>
-						{", for "}
-						<select hidden={this.state.showPriceTypes ? "" : "hidden"}>
-							{this.state.priceTypes.map(each => {
+							{this.state.acquisitionTypes.map(each => {
 								return <option>{each}</option>
 							})}
 						</select>
-						{" GHS/US$"}
-						<input
-							type="number"
-							value={this.state.queryPriceValue}
-							hidden={this.state.showPriceValue ? "" : "hidden"}
-							onChange={this.updatePrice}
+						{"  a "}
+						<select
+							hidden={this.state.showNumBedroomsSelect ? "" : "hidden"}
+							value={this.state.queryNumBedrooms}
+							onChange={this.handleNumBedroomsChanged}
+						>
+							{this.state.numBedroomOptions.map(each => {
+								return <option>{each}</option>
+							})}
+						</select>{" "}
+						<select
+							onChange={this.handlePropertyTypeChanged}
+							value={this.state.queryPropertyType}
+						>
+							{this.state.propertyTypes.map(each => {
+								return <option>{each}</option>
+							})}
+						</select>
+						<br />
+						<div hidden={this.state.sellPropertySelected ? "hidden" : ""}>
+							{" in "}
+							<select
+								hidden={this.state.showLocationSelect ? "" : "hidden"}
+								type="text"
+								value={this.state.queryLocation}
+								onChange={this.handleLocationChanged}
+							>
+								<Locations onChange={this.handleLocationChanged} />
+								{/* {this.state.locations.map(location => {
+								return <option>{location.name}</option>
+							})} */}
+							</select>
+							{", for "}
+							<select hidden={this.state.showPriceTypes ? "" : "hidden"}>
+								{this.state.priceTypes.map(each => {
+									return <option>{each}</option>
+								})}
+							</select>
+							<p>{" GHS"}
+							<input
+								type="number"
+								value={this.state.queryPriceValue}
+								hidden={this.state.showPriceValue ? "" : "hidden"}
+								onChange={this.updatePrice}
+								size={7}
+							/></p>
+						</div>
+						<br />
+						<SearchButton
+							acqType={this.state.queryAcquisitionType}
+							numBedrooms={this.state.queryNumBedrooms}
+							propertyType={this.state.queryPropertyType}
+							priceType={this.state.queryPriceType}
+							location={this.state.queryLocation}
+							price={this.state.queryPriceValue}
 						/>
-					</div>
-					<br />
-					<Link
-						to={{
-							pathname: PATHS.SEARCH_RESULTS,
-							state: {
-								
-								acqType: this.state.queryAcquisitionType,
-								numBedrooms: this.state.queryNumBedrooms,
-								propertyType: this.state.queryPropertyType,
-								priceType: this.state.queryPriceType,
-								location: this.state.queryLocation,
-								price: this.state.queryPriceValue,
-							},
-						}}
-					>
-						<input type="button" onClick={this.submitForm} value={"Next"} />
-					</Link>
+					</h1>
 				</form>
 			</div>
 		)

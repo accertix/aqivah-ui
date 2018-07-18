@@ -56,6 +56,35 @@ export default class SearchResults extends Component {
 					location {
 						name
 						id
+						region
+					}
+					numBedrooms
+					numBathrooms
+					imageURLs
+					source {
+						name
+						url
+					}
+					propertyType {
+						id
+						name
+					}
+					streetAddress
+					size
+					unitOfMeasurement
+					numPlots
+					projectName
+					developer
+					unitName
+					floorArea
+					hasBalcony
+					extraAmenities
+					lister {
+						id
+						firstname
+						lastname
+						phone
+						email
 					}
 				}
 			}
@@ -88,26 +117,35 @@ export default class SearchResults extends Component {
 
 					return data.PropertiesSearch.map(property => {
 						return (
-							<Link
-								to={{
-									pathname: `${PATHS.SEARCH_RESULTS}/${property.id}`,
-									state: {
-										currentProperty: property,
-										queryValues: this.properties,
-									},
-								}}
-							>
-								<View>
-									<img
-										className="mw-100 mh-25 img-fluid"
-										src="http://ofirsrl.com/wp-content/uploads/2018/03/beautiful-home-pic-beautiful-home-pictures-house-design-photos.jpg"
-									/>
-									<Mask pattern={7} className={"d-flex align-items-end justify-content-start"}>
-										<h4 className="white-text">{property.title} </h4>
-									</Mask>
-								</View>
-								<br />
-							</Link>
+							<div key={property.id}>
+								<Link
+									to={{
+										pathname: `${PATHS.SEARCH_RESULTS}/${property.id}`,
+										state: {
+											currentProperty: property,
+											queryValues: this.properties,
+										},
+									}}
+								>
+									<View>
+										<img
+											className="mw-100 mh-25 img-fluid"
+											src="http://ofirsrl.com/wp-content/uploads/2018/03/beautiful-home-pic-beautiful-home-pictures-house-design-photos.jpg"
+										/>
+										<Mask pattern={7}>
+											<h4 className="white-text flex-start">
+												{property.title}{" "}
+											</h4>
+											<div className="white-text d-flex align-items-start">
+												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
+												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
+												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
+											</div>
+										</Mask>
+									</View>
+									<br />
+								</Link>
+							</div>
 						)
 					})
 				}}

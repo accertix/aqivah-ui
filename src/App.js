@@ -12,7 +12,7 @@ import { HttpLink } from "apollo-link-http"
 import { ApolloProvider } from "react-apollo"
 import Locations from "./components/Locations"
 import { BrowserRouter as Router, NavLink } from "react-router-dom"
-import Routes from './components/routes'
+import Routes from "./components/routes"
 
 /**
  * loading page: all white, with aqivah, all caps, words spaced out, and colors changing between the 4.
@@ -34,10 +34,10 @@ const client = new ApolloClient({
 class App extends Component {
 	render() {
 		return (
-			<div className="App">
+			<div className="App ">
 				<ApolloProvider client={client}>
 					<Router>
-						<div className="container-fluid">
+						<div className="container-fluid ">
 							<div className="row">
 								<div className="col-md-2">insert main side nav here</div>
 								<div className="col-md-10">
