@@ -15,6 +15,7 @@ export default class SearchResults extends Component {
 		this.queryValues = this.props.location.state
 			? this.props.location.state
 			: this.props
+
 		console.log("fresh query values")
 		console.log(this.queryValues)
 
@@ -25,12 +26,10 @@ export default class SearchResults extends Component {
 			price: this.queryValues.price,
 			propertyType: this.queryValues.propertyType,
 			priceType: this.queryValues.priceType,
-			searchResults: [],
 		}
 		console.log(this.properties)
 	}
 
-	
 	render() {
 		//create single source of truth for all queries, which can then be imported and used.
 		const GET_PROPERTIES = gql`
@@ -99,10 +98,15 @@ export default class SearchResults extends Component {
 								}}
 							>
 								<View>
-									<img src="https://mdbootstrap.com/img/Photos/Others/nature-sm.jpg" />
-									<div>{property.title}</div>
-									<Mask />
+									<img
+										className="mw-100 mh-25 img-fluid"
+										src="http://ofirsrl.com/wp-content/uploads/2018/03/beautiful-home-pic-beautiful-home-pictures-house-design-photos.jpg"
+									/>
+									<Mask pattern={7} className={"d-flex align-items-end justify-content-start"}>
+										<h4 className="white-text">{property.title} </h4>
+									</Mask>
 								</View>
+								<br />
 							</Link>
 						)
 					})

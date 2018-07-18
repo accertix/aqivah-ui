@@ -16,8 +16,8 @@ export default class ResultDetails extends React.Component {
 			quickAccessBarIsCollapsed: false,
 		}
 
-        this.collapseQuickAccessBar = this.collapseQuickAccessBar.bind(this)
-        console.log(this.state.queryValues)
+		this.collapseQuickAccessBar = this.collapseQuickAccessBar.bind(this)
+		console.log(this.state.queryValues)
 	}
 
 	collapseQuickAccessBar() {
@@ -27,13 +27,15 @@ export default class ResultDetails extends React.Component {
 	}
 
 	render() {
-        const { id } = this.props.match.params
-        
+		const { id } = this.props.match.params
+
 		return (
 			<div>
-				
-                <br /> <ResultsQuickAccessBar queryValues={this.state.queryValues}
-                onClick={this.collapseQuickAccessBar} />
+				<br />{" "}
+				<ResultsQuickAccessBar
+					queryValues={this.state.queryValues}
+					onClick={this.collapseQuickAccessBar}
+				/>
 				{this.state.quickAccessBarIsCollapsed
 					? ""
 					: ` ${id} <br /> bar that links to modal showing all property details
