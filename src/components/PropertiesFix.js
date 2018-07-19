@@ -56,7 +56,6 @@ export default class SearchResults extends Component {
 					location {
 						name
 						id
-						region
 					}
 					numBedrooms
 					numBathrooms
@@ -78,7 +77,6 @@ export default class SearchResults extends Component {
 					unitName
 					floorArea
 					hasBalcony
-					extraAmenities
 					lister {
 						id
 						firstname
@@ -127,21 +125,27 @@ export default class SearchResults extends Component {
 										},
 									}}
 								>
-									<View>
+									<View className="z-depth-5 mh-25">
 										<img
 											className="mw-100 mh-25 img-fluid"
 											src="http://ofirsrl.com/wp-content/uploads/2018/03/beautiful-home-pic-beautiful-home-pictures-house-design-photos.jpg"
 										/>
-										<Mask pattern={7}>
-											<h4 className="white-text flex-start">
-												{property.title}{" "}
-											</h4>
-											<div className="white-text d-flex align-items-start">
-												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
-												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
-												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
+										<div className="row">
+											<div className="black-text d-flex align-items-end col-sm-8">
+												<h6 className="title">{property.title} </h6>
+												<br />
 											</div>
-										</Mask>
+											<div className="col-sm-4">
+												{" show"}
+											</div>
+										</div>
+
+											{/* <div className="white-text d-flex align-items-start">
+												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
+												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
+												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
+											</div> */}
+										
 									</View>
 									<br />
 								</Link>
