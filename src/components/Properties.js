@@ -4,6 +4,7 @@ import gql from "graphql-tag"
 import { View, Mask } from "mdbreact"
 import { Link } from "react-router-dom"
 import PATHS from "./pathConstants"
+import "./../css/Properties.css"
 
 export default class SearchResults extends Component {
 	constructor(props) {
@@ -125,28 +126,24 @@ export default class SearchResults extends Component {
 										},
 									}}
 								>
-									<View className="z-depth-5 mh-25">
-										<img
-											className="mw-100 mh-25 img-fluid"
-											src="http://ofirsrl.com/wp-content/uploads/2018/03/beautiful-home-pic-beautiful-home-pictures-house-design-photos.jpg"
-										/>
-										<div className="row">
-											<div className="black-text d-flex align-items-end col-sm-8">
-												<h6 className="title">{property.title} </h6>
-												<br />
-											</div>
-											<div className="col-sm-4">
-												{" show"}
-											</div>
+									<img
+										className="img-fluid result"
+										src="http://ofirsrl.com/wp-content/uploads/2018/03/beautiful-home-pic-beautiful-home-pictures-house-design-photos.jpg"
+									/>
+									<div className="row">
+										<div className="black-text d-flex align-items-end col-sm-8">
+											<h6 className="title">{property.title} </h6>
+											<br />
 										</div>
+										<div className="col-sm-4">{" show"}</div>
+									</div>
 
-											{/* <div className="white-text d-flex align-items-start">
+									{/* <div className="white-text d-flex align-items-start">
 												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
 												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
 												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
 											</div> */}
-										
-									</View>
+
 									<br />
 								</Link>
 							</div>

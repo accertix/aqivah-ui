@@ -6,7 +6,7 @@ import {
 	Switch,
 } from "react-router-dom"
 import SearchForm from "./SearchForm"
-import QueryResults from "./PropertiesFix"
+import QueryResults from "./Properties"
 import ResultDetails from "./ResultDetails"
 import Error from "./Error"
 import PATHS from "./pathConstants"

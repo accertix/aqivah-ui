@@ -1,5 +1,5 @@
 import React from "react"
-import Properties from "./PropertiesFix"
+import Properties from "./Properties"
 
 export default class ResultsQuickAccessBar extends React.Component {
 	constructor(props) {
