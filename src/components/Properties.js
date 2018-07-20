@@ -137,14 +137,6 @@ export default class SearchResults extends Component {
 										</div>
 										<div className="col-sm-4">{" show"}</div>
 									</div>
-
-									{/* <div className="white-text d-flex align-items-start">
-												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
-												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
-												<i src="../css/icons/bed.svg">{property.numBedrooms}</i>
-											</div> */}
-
-									<br />
 								</Link>
 							</div>
 						)
