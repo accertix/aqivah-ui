@@ -22,7 +22,7 @@ const SearchButton = props => {
 					},
 				}}
 			>
-				<Button className="btn-lg" color="success" outline>
+				<Button className="btn-lg" color="success">
 					{"Next"}
 				</Button>
 			</Link>

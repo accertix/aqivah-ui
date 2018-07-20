@@ -9,6 +9,7 @@ import { Link } from "react-router-dom"
 import { QueryResults } from "./queries"
 import PATHS from "./pathConstants"
 import SearchButton from "./SearchButton"
+import Header from "./Header"
 
 //todo: send state values in array to db, so admin can easily update.
 
