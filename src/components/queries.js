@@ -17,7 +17,7 @@ const QueryResults = props => {
 	)
 }
 
-const GET_PROPERTIES = gql`
+const GET_PROPERTIESS = gql`
 	query properties(
 		$acqType: String!
 		$numBedrooms: Int
@@ -42,8 +42,35 @@ const GET_PROPERTIES = gql`
 				name
 				id
 			}
+			numBedrooms
+			numBathrooms
+			imageURLs
+			source {
+				name
+				url
+			}
+			propertyType {
+				id
+				name
+			}
+			streetAddress
+			size
+			unitOfMeasurement
+			numPlots
+			projectName
+			developer
+			unitName
+			floorArea
+			hasBalcony
+			lister {
+				id
+				firstname
+				lastname
+				phone
+				email
+			}
 		}
 	}
 `
 
-export { QueryResults, GET_PROPERTIES }
+export { QueryResults, GET_PROPERTIESS }

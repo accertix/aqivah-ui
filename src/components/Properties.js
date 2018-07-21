@@ -1,9 +1,11 @@
 import React, { Component } from "react"
 import { Query } from "react-apollo"
 import gql from "graphql-tag"
-import { View, Mask } from "mdbreact"
+import { View, Mask, Fa } from "mdbreact"
 import { Link } from "react-router-dom"
 import PATHS from "./pathConstants"
+import "./../css/Properties.css"
+import { GET_PROPERTIESS } from "./queries"
 import "./../css/Properties.css"
 
 export default class SearchResults extends Component {
@@ -28,7 +30,19 @@ export default class SearchResults extends Component {
 			propertyType: this.queryValues.propertyType,
 			priceType: this.queryValues.priceType,
 		}
+
+		this.state = {
+			liked: false,
+		}
+
 		console.log(this.properties)
+		this.liked = this.liked.bind(this)
+	}
+
+	liked(event) {
+		this.setState({
+			liked: !this.state.liked,
+		})
 	}
 
 	render() {
@@ -100,7 +114,7 @@ export default class SearchResults extends Component {
 
 		return (
 			<Query
-				query={GET_PROPERTIES}
+				query={GET_PROPERTIESS}
 				variables={{
 					acqType,
 					numBedrooms,
@@ -117,27 +131,47 @@ export default class SearchResults extends Component {
 					return data.PropertiesSearch.map(property => {
 						return (
 							<div key={property.id}>
-								<Link
-									to={{
-										pathname: `${PATHS.SEARCH_RESULTS}/${property.id}`,
-										state: {
-											currentProperty: property,
-											queryValues: this.properties,
-										},
-									}}
-								>
-									<img
-										className="img-fluid result"
-										src="http://ofirsrl.com/wp-content/uploads/2018/03/beautiful-home-pic-beautiful-home-pictures-house-design-photos.jpg"
+								<div className="property-card z-depth-2 animated fadeInDown">
+									<Fa
+										icon="heart"
+										size="2x"
+										className={
+											this.state.liked ? "liked animated bounce" : "like"
+										}
+										onClick={this.liked}
 									/>
-									<div className="row">
-										<div className="black-text d-flex align-items-end col-sm-8">
-											<h6 className="title">{property.title} </h6>
-											<br />
+
+									<Link
+										to={{
+											pathname: `${PATHS.SEARCH_RESULTS}/${property.id}`,
+											state: {
+												currentProperty: property,
+												queryValues: this.properties,
+											},
+										}}
+									>
+										<img
+											src="http://ofirsrl.com/wp-content/uploads/2018/03/beautiful-home-pic-beautiful-home-pictures-house-design-photos.jpg"
+											className="img-fluid property-image"
+										/>
+										<div className="dark-background">
+											<b>
+												<div className="icon-shower">
+													3 <Fa icon="shower" />
+												</div>
+
+												<div className="icon-bed">
+													2 <Fa icon="bed" />
+												</div>
+											</b>
 										</div>
-										<div className="col-sm-4">{" show"}</div>
-									</div>
-								</Link>
+										<div className="property-title">
+											<b>3 bedroom house in the edge of Accra</b>
+										</div>
+									</Link>
+								</div>
+
+								<br />
 							</div>
 						)
 					})

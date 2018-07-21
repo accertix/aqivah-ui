@@ -8,6 +8,7 @@ import {
 import SearchForm from "./SearchForm"
 import QueryResults from "./Properties"
 import ResultDetails from "./ResultDetails"
+import Test from './CurrentTest'
 import Error from "./Error"
 import PATHS from "./pathConstants"
 
@@ -19,6 +20,7 @@ const Routes = () => {
 					<Route exact path={PATHS.HOME} component={SearchForm} />
 					<Route exact path={PATHS.SEARCH_RESULTS} component={QueryResults} />
 					<Route path={PATHS.SEARCH_RESULT_DETAILS} component={ResultDetails} />
+					<Route path={PATHS.TEST} component={Test} />
 					<Route component={Error} />
 				</Switch>
 			</div>
