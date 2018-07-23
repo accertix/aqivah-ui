@@ -1,11 +1,11 @@
 import React from "react"
-import Properties from "./Properties"
+import SearchResults from "./SearchResults"
 import gql from "graphql-tag"
 
-/**main query to search for properties */
+/**main query to search for SearchResults */
 const QueryResults = props => {
 	return (
-		<Properties
+		<SearchResults
 			acquisitionType={props.queryAcquisitionType}
 			numBedrooms={props.queryNumBedrooms}
 			priceType={props.priceTypes}

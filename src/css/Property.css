@@ -1,0 +1,49 @@
+.property-title {
+	position: absolute;
+	bottom: 15px;
+	left: 5px;
+	color: white;
+}
+
+.property-image {
+	height: 120px;
+	width: 100%;
+}
+
+.property-card {
+	position: relative;
+}
+
+.icon-shower {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	color: white;
+}
+
+.icon-bed {
+	position: absolute;
+	top: 30px;
+	left: 5px;
+	color: white;
+}
+
+.dark-background {
+	background: rgb(0, 0, 0);
+}
+
+.like {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: white;
+}
+
+.liked {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    color: red;
+    border: 1px;
+    border-color: white;
+}

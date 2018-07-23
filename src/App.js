@@ -38,7 +38,7 @@ class App extends Component {
 			<div className="App ">
 				<ApolloProvider client={client}>
 					<Router>
-						<div className="container-fluid ">
+						<div className="container-fluid">
 						<Header />
 							<div className="row">
 								

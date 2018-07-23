@@ -1,5 +1,6 @@
 import React from "react"
-import { Card } from "mdbreact"
+import { Card, Fa } from "mdbreact"
+import './../css/Header.css'
 
 export default class Header extends React.Component {
 	constructor(props) {
@@ -12,10 +13,10 @@ export default class Header extends React.Component {
 
 	render() {
 		return this.state.isMobile ? (
-			<div className="row">
-				<div className="col-4">{"user's profile link"}</div>
+			<div className="row header z-depth-2">
+				<div className="col-4 text-left"><Fa icon="user" /></div>
 				<div className="col-4"><b>aqivah</b></div>
-				<div className="col-4">hamburger menu</div>
+				<div className="col-4 text-right"><Fa icon="bars" /></div>
 			</div>
 		) : (
 			""

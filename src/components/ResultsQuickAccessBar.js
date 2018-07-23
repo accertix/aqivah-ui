@@ -1,5 +1,5 @@
 import React from "react"
-import Properties from "./Properties"
+import SearchResults from "./SearchResults"
 
 export default class ResultsQuickAccessBar extends React.Component {
 	constructor(props) {
@@ -28,7 +28,7 @@ export default class ResultsQuickAccessBar extends React.Component {
 		return (
 			<div onClick={this.toggleCollapse}>
 				{this.state.isCollapsed ? (
-					<Properties
+					<SearchResults
 						acqType={this.state.acqType}
 						numBedrooms={this.state.numBedrooms}
 						location={this.state.location}

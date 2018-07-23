@@ -157,11 +157,11 @@ export default class SearchResults extends Component {
 										<div className="dark-background">
 											<b>
 												<div className="icon-shower">
-													3 <Fa icon="shower" />
+													{property.numBathrooms }{" "}<Fa icon="shower" />
 												</div>
 
 												<div className="icon-bed">
-													2 <Fa icon="bed" />
+													{property.numBedrooms }{" "}<Fa icon="bed" />
 												</div>
 											</b>
 										</div>
