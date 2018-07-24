@@ -1,5 +1,6 @@
 import React from "react"
 import ResultsQuickAccessBar from "./ResultsQuickAccessBar"
+import ResultsDetailsBasicInfo from "./ResultsDetailsBasicInfo"
 
 export default class ResultDetails extends React.Component {
 	constructor(props) {
@@ -14,10 +15,16 @@ export default class ResultDetails extends React.Component {
 
 			queryValues: this.props.location.state.queryValues,
 			quickAccessBarIsCollapsed: false,
+			tabsToggled: true,
 		}
 
 		this.collapseQuickAccessBar = this.collapseQuickAccessBar.bind(this)
 		console.log(this.state.queryValues)
+		this.toggleTabs = this.toggleTabs.bind(this)
+	}
+
+	toggleTabs() {
+		this.setState({ tabsToggled: !this.state.tabsToggled })
 	}
 
 	collapseQuickAccessBar() {
@@ -31,24 +38,47 @@ export default class ResultDetails extends React.Component {
 
 		return (
 			<div>
-				<br />{" "}
+				<br />
 				<ResultsQuickAccessBar
 					queryValues={this.state.queryValues}
 					onClick={this.collapseQuickAccessBar}
 				/>
-				{this.state.quickAccessBarIsCollapsed
-					? ""
-					: ` ${id} <br /> bar that links to modal showing all property details
-				<br /> <br />Display property details here
-				<br /> carousel of images
-				<br /> BASIC INFO, MAPS & RATINGS, [probably be grouped into tabs]
-				<br /> title, option to like/save the property for later.
-				<br /> description.
-				<br /> num Bedrooms, num Bathrooms, size + unit of measurement,
-				numPlots, project name by developer, unitName
-				<br /> location
-				<br /> street address
-				<br /> update property history as well, if liked.`}
+				{this.state.quickAccessBarIsCollapsed ? (
+					""
+				) : (
+					<div>
+						<h4>{this.state.currentProperty.title}</h4>
+						<ul className="nav nav-tabs nav-justified">
+							<li className="nav-item" onClick={this.toggleTabs}>
+								<a
+									className={
+										this.state.tabsToggled
+											? "nav-link active black-text"
+											: "nav-link black-text"
+									}
+								>
+									{"Basic Info"}
+								</a>
+							</li>
+							<li className="nav-item" onClick={this.toggleTabs}>
+								<a
+									className={
+										this.state.tabsToggled
+											? "nav-link black-text"
+											: "nav-link active black-text"
+									}
+								>
+									{"Maps & More"}
+								</a>
+							</li>
+						</ul>
+						{this.state.tabsToggled ? (
+							<ResultsDetailsBasicInfo property={this.state.currentProperty}/>
+						) : (
+							<div>{"maps toggled"}</div>
+						)}
+					</div>
+				)}
 			</div>
 		)
 	}

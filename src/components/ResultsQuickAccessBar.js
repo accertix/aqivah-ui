@@ -37,7 +37,7 @@ export default class ResultsQuickAccessBar extends React.Component {
 						price={this.state.price}
 					/>
 				) : (
-					<div>tap here to view search results</div>
+					<div>tap here to view all search results</div>
 				)}
 			</div>
 		)

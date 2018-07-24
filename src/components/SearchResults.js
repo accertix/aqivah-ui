@@ -7,6 +7,7 @@ import PATHS from "./pathConstants"
 import "./../css/Properties.css"
 import { GET_PROPERTIESS } from "./queries"
 import "./../css/Properties.css"
+import Property from "./Property"
 
 export default class SearchResults extends Component {
 	constructor(props) {
@@ -33,16 +34,24 @@ export default class SearchResults extends Component {
 
 		this.state = {
 			liked: false,
+			queryValues: this.properties,
+			searchResults: [],
 		}
 
 		console.log(this.properties)
 		this.liked = this.liked.bind(this)
+
+		this.updateSearchResults = this.updateSearchResults.bind(this)
 	}
 
 	liked(event) {
 		this.setState({
 			liked: !this.state.liked,
 		})
+	}
+
+	updateSearchResults(properties) {
+		this.setState({ searchResults: properties })
 	}
 
 	render() {
@@ -129,51 +138,7 @@ export default class SearchResults extends Component {
 					if (error) return "error"
 
 					return data.PropertiesSearch.map(property => {
-						return (
-							<div key={property.id}>
-								<div className="property-card z-depth-2 animated fadeInDown">
-									<Fa
-										icon="heart"
-										size="2x"
-										className={
-											this.state.liked ? "liked animated bounce" : "like"
-										}
-										onClick={this.liked}
-									/>
-
-									<Link
-										to={{
-											pathname: `${PATHS.SEARCH_RESULTS}/${property.id}`,
-											state: {
-												currentProperty: property,
-												queryValues: this.properties,
-											},
-										}}
-									>
-										<img
-											src="http://ofirsrl.com/wp-content/uploads/2018/03/beautiful-home-pic-beautiful-home-pictures-house-design-photos.jpg"
-											className="img-fluid property-image"
-										/>
-										<div className="dark-background">
-											<b>
-												<div className="icon-shower">
-													{property.numBathrooms }{" "}<Fa icon="shower" />
-												</div>
-
-												<div className="icon-bed">
-													{property.numBedrooms }{" "}<Fa icon="bed" />
-												</div>
-											</b>
-										</div>
-										<div className="property-title">
-											<b>3 bedroom house in the edge of Accra</b>
-										</div>
-									</Link>
-								</div>
-
-								<br />
-							</div>
-						)
+						return <Property property={property} queryValues={this.state.queryValues}/>
 					})
 				}}
 			</Query>

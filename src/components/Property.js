@@ -35,7 +35,7 @@ export default class Property extends React.Component {
 							pathname: `${PATHS.SEARCH_RESULTS}/${property.id}`,
 							state: {
 								currentProperty: property,
-								queryValues: this.properties,
+								queryValues: this.props.queryValues,
 							},
 						}}
 					>
