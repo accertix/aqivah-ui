@@ -1,6 +1,8 @@
 import React from "react"
 import ResultsQuickAccessBar from "./ResultsQuickAccessBar"
 import ResultsDetailsBasicInfo from "./ResultsDetailsBasicInfo"
+import MapRatingsDetails from "./MapRatingsDetails"
+import PropertyMap from "./Map"
 
 export default class ResultDetails extends React.Component {
 	constructor(props) {
@@ -31,51 +33,65 @@ export default class ResultDetails extends React.Component {
 		this.setState({
 			quickAccessBarIsCollapsed: !this.state.quickAccessBarIsCollapsed,
 		})
+		this.forceUpdate()
 	}
 
 	render() {
 		const { id } = this.props.match.params
+		const currentProperty = this.props.location.state.currentProperty
+		const queryValues = this.props.location.state.queryValues
 
 		return (
 			<div>
 				<br />
 				<ResultsQuickAccessBar
-					queryValues={this.state.queryValues}
+					queryValues={queryValues}
 					onClick={this.collapseQuickAccessBar}
 				/>
 				{this.state.quickAccessBarIsCollapsed ? (
 					""
 				) : (
 					<div>
-						<h4>{this.state.currentProperty.title}</h4>
-						<ul className="nav nav-tabs nav-justified">
-							<li className="nav-item" onClick={this.toggleTabs}>
-								<a
-									className={
-										this.state.tabsToggled
-											? "nav-link active black-text"
-											: "nav-link black-text"
-									}
-								>
-									{"Basic Info"}
-								</a>
-							</li>
-							<li className="nav-item" onClick={this.toggleTabs}>
-								<a
-									className={
-										this.state.tabsToggled
-											? "nav-link black-text"
-											: "nav-link active black-text"
-									}
-								>
-									{"Maps & More"}
-								</a>
-							</li>
-						</ul>
+						<h4><b>{currentProperty.title}</b></h4>
+						<b>
+							<ul className="nav nav-tabs nav-justified">
+								<li className="nav-item" onClick={this.toggleTabs}>
+									<a
+										className={
+											this.state.tabsToggled
+												? "nav-link active black-text"
+												: "nav-link black-text"
+										}
+									>
+										{"Basic Info"}
+									</a>
+								</li>
+								<li className="nav-item" onClick={this.toggleTabs}>
+									<a
+										className={
+											this.state.tabsToggled
+												? "nav-link black-text"
+												: "nav-link active black-text"
+										}
+									>
+										{"Maps & More"}
+									</a>
+								</li>
+							</ul>
+						</b>
 						{this.state.tabsToggled ? (
-							<ResultsDetailsBasicInfo property={this.state.currentProperty}/>
+							<ResultsDetailsBasicInfo property={currentProperty} />
 						) : (
-							<div>{"maps toggled"}</div>
+							<div>
+								<br />
+								<MapRatingsDetails />
+								{/*
+								todo: rename this to something more appropriate. will be done during refactoring */}
+								<br />
+								<h5>
+									<b>Ratings for {" "} {currentProperty.location.name}</b>
+								</h5>
+							</div>
 						)}
 					</div>
 				)}

@@ -33,20 +33,42 @@ const client = new ApolloClient({
 })
 
 class App extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			menuToggled: false,
+		}
+		this.toggleMenu = this.toggleMenu.bind(this)
+	}
+
+	toggleMenu() {
+		this.setState({ menuToggled: !this.state.menuToggled })
+	}
+
 	render() {
 		return (
 			<div className="App ">
 				<ApolloProvider client={client}>
 					<Router>
-						<div className="container-fluid">
-						<Header />
-							<div className="row">
-								
-								<div className="col-md-10">
-									<br />
-									<Routes />
+						<div>
+							{this.state.menuToggled ? (
+								<div onClick={this.toggleMenu}>
+									"menu should be showing now. Click here to hide menu"
 								</div>
-							</div>
+							) : (
+								<div>
+									<Header toggleMenu={this.toggleMenu} />
+									<br />
+									<div className="container">
+										<div className="row">
+											<div className="col-md-10">
+												<br />
+												<Routes />
+											</div>
+										</div>
+									</div>
+								</div>
+							)}
 						</div>
 					</Router>
 				</ApolloProvider>

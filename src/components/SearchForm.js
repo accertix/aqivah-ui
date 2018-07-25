@@ -118,7 +118,7 @@ export default class SearchForm extends Component {
 			<div>
 				<form className="form">
 					<h1>
-						{"I’d like to "}
+						{"I’d like to "}<br />
 						<select
 							value={this.state.queryAcquisitionType}
 							onChange={this.updateAcquisitionType}
@@ -159,7 +159,7 @@ export default class SearchForm extends Component {
 								return <option>{location.name}</option>
 							})} */}
 							</select>
-							{", for "}
+							<br />{" for "} <br />
 							<select hidden={this.state.showPriceTypes ? "" : "hidden"}>
 								{this.state.priceTypes.map(each => {
 									return <option>{each}</option>

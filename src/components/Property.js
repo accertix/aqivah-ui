@@ -21,7 +21,10 @@ export default class Property extends React.Component {
 	render() {
 		const property = this.props.property
 		return (
-			<div key={property.id}>
+			<div
+				key={property.id}
+				onClick={this.props.toggleBar ? this.props.toggleBar : ""}
+			>
 				<div className="property-card z-depth-2 animated fadeInDown">
 					<Fa
 						icon="heart"
@@ -55,7 +58,7 @@ export default class Property extends React.Component {
 							</b>
 						</div>
 						<div className="property-title">
-							<b>3 bedroom house in the edge of Accra</b>
+							<b>{property.title}</b>
 						</div>
 					</Link>
 				</div>

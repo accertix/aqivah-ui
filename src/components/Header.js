@@ -1,6 +1,6 @@
 import React from "react"
 import { Card, Fa } from "mdbreact"
-import './../css/Header.css'
+import "./../css/Header.css"
 
 export default class Header extends React.Component {
 	constructor(props) {
@@ -13,10 +13,16 @@ export default class Header extends React.Component {
 
 	render() {
 		return this.state.isMobile ? (
-			<div className="row header z-depth-2">
-				<div className="col-4 text-left"><Fa icon="user" /></div>
-				<div className="col-4"><b>aqivah</b></div>
-				<div className="col-4 text-right"><Fa icon="bars" /></div>
+			<div className="row header z-depth-2 mb-3">
+				<div className="col-4 text-left px-4">
+					<Fa icon="user" />
+				</div>
+				<div className="col-4">
+					<b>aqivah</b>
+				</div>
+				<div className="col-4 text-right px-4">
+					<Fa icon="bars" onClick={this.props.toggleMenu} />
+				</div>
 			</div>
 		) : (
 			""

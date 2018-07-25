@@ -33,21 +33,12 @@ export default class SearchResults extends Component {
 		}
 
 		this.state = {
-			liked: false,
 			queryValues: this.properties,
-			searchResults: [],
 		}
 
 		console.log(this.properties)
-		this.liked = this.liked.bind(this)
 
 		this.updateSearchResults = this.updateSearchResults.bind(this)
-	}
-
-	liked(event) {
-		this.setState({
-			liked: !this.state.liked,
-		})
 	}
 
 	updateSearchResults(properties) {
@@ -80,6 +71,12 @@ export default class SearchResults extends Component {
 					location {
 						name
 						id
+						trafficRating
+						crimeRating
+						electricitySupplyRating
+						waterSupplyRating
+						noiseLevelsRating
+						recreationalSpotsRating
 					}
 					numBedrooms
 					numBathrooms
@@ -137,9 +134,22 @@ export default class SearchResults extends Component {
 					if (loading) return "loading"
 					if (error) return "error"
 
-					return data.PropertiesSearch.map(property => {
-						return <Property property={property} queryValues={this.state.queryValues}/>
-					})
+					return (
+						<div>
+							<h5>
+								<b>Search Results </b>
+							</h5>
+							{data.PropertiesSearch.map(property => {
+								return (
+									<Property
+										property={property}
+										queryValues={this.state.queryValues}
+										toggleBar={this.props.toggleBar ? this.props.toggleBar : ""}
+									/>
+								)
+							})}
+						</div>
+					)
 				}}
 			</Query>
 		)

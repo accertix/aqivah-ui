@@ -66,6 +66,12 @@ export default class ResultsDetailsBasicInfo extends React.Component {
 						</CarouselItem>
 					</CarouselInner>
 				</Carousel>
+                <br /> <hr />
+                <h5><b>Description</b></h5>
+                {this.props.property.description}
+                <br /><hr />
+                <h5><b></b></h5>
+                
 			</div>
 		)
 	}

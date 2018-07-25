@@ -1,26 +1,8 @@
 .header {
-	position: sticky;
-}
-
-@keyframes aqivah-header {
-	0% {
-		color: black;
-	}
-	25% {
-		color: red;
-	}
-	50% {
-		color: yellowgreen;
-	}
-	100% {
-		color: white;
-	}
-}
-
-.aqivah {
-    animation-name: aqivah-header;
-    animation-iteration-count: infinite;
-    animation-duration: 2s;
+	position: fixed;
+	width: 100%;
+	margin: auto;
+	height: 30px;
 }
 
 
