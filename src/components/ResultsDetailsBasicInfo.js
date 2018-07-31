@@ -1,7 +1,6 @@
 import React from "react"
 import {
 	CarouselItem,
-	Container,
 	Carousel,
 	View,
 	CarouselInner,
