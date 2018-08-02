@@ -1,6 +1,5 @@
 .form {
-	font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 select {
@@ -22,4 +21,9 @@ input {
 	font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 	padding: 2%;
 	
+}
+
+.form-select {
+	text-decoration: underline;
+	line-height: 250%;
 }

@@ -18,7 +18,7 @@ const Locations = () => (
 			if (error) return <option>Error...</option>
 
 			return data.locations.map(location => {
-				return <option key={location.id}>{location.name}</option>
+				return <div key={location.id} className="form-select">{location.name}</div>
 			})
 		}}
 	</Query>

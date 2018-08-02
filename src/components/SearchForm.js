@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import { Query } from "react-apollo"
-import { Card, CardBody } from "mdbreact"
+import { Card, CardBody, Fa } from "mdbreact"
 import "./../css/SearchForm.css"
 import { map } from "async"
 import gql from "graphql-tag"
@@ -10,12 +10,16 @@ import { QueryResults } from "./queries"
 import PATHS from "./pathConstants"
 import SearchButton from "./SearchButton"
 import Header from "./Header"
+import SearchFormOptions from "./SearchFormOptions"
 
 //todo: send state values in array to db, so admin can easily update.
 
 export default class SearchForm extends Component {
 	constructor(props) {
 		super(props)
+
+		this.handleAcqTypeOnClick = this.handleAcqTypeOnClick.bind(this)
+		this.handleAcqTypeSelected = this.handleAcqTypeSelected.bind(this)
 
 		this.updateAcquisitionType = this.updateAcquisitionType.bind(this)
 		// this.toggleShowLocations = this.toggleShowLocations.bind(this)
@@ -28,12 +32,20 @@ export default class SearchForm extends Component {
 		// this.queryProperties = this.queryProperties.bind(this)
 
 		this.state = {
-			showNumBedroomsSelect: true,
-			showLocationSelect: true,
+			showOptions: false,
+			showLocationOptions: false,
+			showNumBedroomOptions: false,
+			showPriceTypeOptions: false,
+			showPropertyTypeOptions: false,
+			showAcquisitionTypeOptions: true,
+
+			showNumBedroomTypes: true,
+			showLocation: true,
 			showPriceTypes: true,
 			showPriceValue: true,
-			sellPropertySelected: false,
-			showLocationsList: false,
+			showPropertyTypes: true,
+			showButton: true,
+
 			priceTypes: ["Around", "Below", "Above"],
 			acquisitionTypes: ["Buy", "Rent", "Sell"],
 			propertyTypes: ["House", "Land", "Office", "Shop"],
@@ -48,6 +60,7 @@ export default class SearchForm extends Component {
 
 			queryAcquisitionType: "Buy",
 			queryNumBedrooms: 1,
+			queryNumBedroomsText: "1 Bedroom",
 			queryPropertyType: "House",
 			queryPriceType: "Around",
 			queryLocation: "Madina",
@@ -78,6 +91,42 @@ export default class SearchForm extends Component {
 		}
 	}
 
+	handleAcqTypeOnClick() {
+		this.setState({
+			showAcquisitionTypeOptions: true,
+			showNumBedroomTypes: false,
+			showPropertyTypes: false,
+			showLocation: false,
+			showPriceTypes: false,
+			showPriceValue: false,
+			showOptions: true,
+		})
+	}
+
+	handleAcqTypeSelected(event) {
+		console.log(event.target.innerHTML)
+		if (event.target.innerHTML === "Sell") {
+			this.setState({
+				queryAcquisitionType: event.target.innerHTML,
+				showPropertyTypes: true,
+				showAcquisitionTypeOptions: false,
+				showOptions: false,
+			})
+		} else {
+			this.setState({
+				queryAcquisitionType: event.target.innerHTML,
+				showNumBedroomTypes: true,
+				showPropertyTypes: true,
+				showLocation: true,
+				showPriceTypes: true,
+				showPriceValue: true,
+				showOptions: false,
+				showAcquisitionTypeOptions: false,
+			})
+		}
+	}
+
+	//todo: remove
 	hideLocations(event) {
 		this.setState({
 			showLocationsList: false,
@@ -116,75 +165,99 @@ export default class SearchForm extends Component {
 	render() {
 		return (
 			<div>
-				<form className="form">
-					<h1>
-						{"I’d like to "}<br />
-						<select
-							value={this.state.queryAcquisitionType}
-							onChange={this.updateAcquisitionType}
+				<span className="form">
+					<h3>
+						{"I’d like to "}
+						<span
+							className="form-select green-text"
+							onClick={this.handleAcqTypeOnClick}
 						>
-							{this.state.acquisitionTypes.map(each => {
-								return <option>{each}</option>
-							})}
-						</select>
-						{"  a "}
-						<select
-							hidden={this.state.showNumBedroomsSelect ? "" : "hidden"}
-							value={this.state.queryNumBedrooms}
-							onChange={this.handleNumBedroomsChanged}
-						>
-							{this.state.numBedroomOptions.map(each => {
-								return <option>{each}</option>
-							})}
-						</select>{" "}
-						<select
-							onChange={this.handlePropertyTypeChanged}
-							value={this.state.queryPropertyType}
-						>
-							{this.state.propertyTypes.map(each => {
-								return <option>{each}</option>
-							})}
-						</select>
-						<br />
-						<div hidden={this.state.sellPropertySelected ? "hidden" : ""}>
-							{" in "}
-							<select
-								hidden={this.state.showLocationSelect ? "" : "hidden"}
-								type="text"
-								value={this.state.queryLocation}
-								onChange={this.handleLocationChanged}
-							>
-								<Locations onChange={this.handleLocationChanged} />
-								{/* {this.state.locations.map(location => {
-								return <option>{location.name}</option>
-							})} */}
-							</select>
-							<br />{" for "} <br />
-							<select hidden={this.state.showPriceTypes ? "" : "hidden"}>
-								{this.state.priceTypes.map(each => {
-									return <option>{each}</option>
-								})}
-							</select>
-							<p>{" GHS"}
-							<input
-								type="number"
-								value={this.state.queryPriceValue}
-								hidden={this.state.showPriceValue ? "" : "hidden"}
-								onChange={this.updatePrice}
-								size={7}
-							/></p>
-						</div>
-						<br />
-						<SearchButton
-							acqType={this.state.queryAcquisitionType}
-							numBedrooms={this.state.queryNumBedrooms}
-							propertyType={this.state.queryPropertyType}
-							priceType={this.state.queryPriceType}
-							location={this.state.queryLocation}
-							price={this.state.queryPriceValue}
-						/>
-					</h1>
-				</form>
+							{this.state.queryAcquisitionType}{" "}
+							<Fa icon="angle-down green-text" />
+						</span>
+						{" a  "}
+						{this.state.showNumBedroomTypes ? (
+							<span>
+								
+								<span className="form-select green-text">
+									{this.state.queryNumBedroomsText}{" "}
+									<Fa icon="angle-down green-text" />
+								</span>
+							</span>
+						) : (
+							""
+						)}{" "}
+						{this.state.showPropertyTypes ? (
+							<span className="form-select green-text">
+								{this.state.queryPropertyType}{" "}
+								<Fa icon="angle-down green-text" />
+							</span>
+						) : (
+							""
+						)}
+						{this.state.showLocation ? (
+							<span>
+								{" in "}
+								<span className="form-select green-text">
+									{this.state.queryLocation} <Fa icon="angle-down green-text" />
+								</span>
+							</span>
+						) : (
+							""
+						)}
+						{this.state.showPriceTypes ? (
+							<span>
+								{" for "}
+								<span className="form-select green-text fa-sm">
+									{this.state.queryPriceType}{" "}
+									<Fa icon="angle-down green-text" />
+								</span>
+							</span>
+						) : (
+							""
+						)}
+						{this.state.showPriceValue ? (
+							<span>
+								<span>
+									{" GHS"}
+									<span className="form-select green-text fa-sm">
+										{this.state.queryPriceValue}{" "}
+									</span>
+								</span>
+							</span>
+						) : (
+							""
+						)}
+						{this.state.showOptions ? (
+							<SearchFormOptions
+								acqTypes={this.state.acquisitionTypes}
+								numBedrooms={this.state.numBedroomOptions}
+								propertyTypes={this.state.propertyTypes}
+								priceTypes={this.state.priceTypes}
+								showAcqTypes={this.state.showAcquisitionTypeOptions}
+								showNumBedroomTypes={this.state.showNumBedroomOptions}
+								showPropertyTypes={this.state.showPropertyTypeOptions}
+								showPriceTypes={this.state.showPriceTypeOptions}
+								showLocations={this.state.showLocationOptions}
+								handleAcqTypeClick={this.handleAcqTypeSelected}
+							/>
+						) : (
+							""
+						)}
+						{this.state.showButton ? (
+							<SearchButton
+								acqType={this.state.queryAcquisitionType}
+								numBedrooms={this.state.queryNumBedrooms}
+								propertyType={this.state.queryPropertyType}
+								priceType={this.state.queryPriceType}
+								location={this.state.queryLocation}
+								price={this.state.queryPriceValue}
+							/>
+						) : (
+							""
+						)}
+					</h3>
+				</span>
 			</div>
 		)
 	}
