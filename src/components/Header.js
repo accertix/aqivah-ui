@@ -13,7 +13,7 @@ export default class Header extends React.Component {
 
 	render() {
 		return this.state.isMobile ? (
-			<div className="row header z-depth-1 mb-3 animated slideInDown">
+			<div className="row header z-depth-1 mb-3 animated slideInDown sticky-top">
 				<div className="col-4 text-left px-4">
 					<Fa icon="user" />
 				</div>

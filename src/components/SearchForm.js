@@ -21,6 +21,9 @@ export default class SearchForm extends Component {
 		this.handleAcqTypeOnClick = this.handleAcqTypeOnClick.bind(this)
 		this.handleAcqTypeSelected = this.handleAcqTypeSelected.bind(this)
 
+		this.handleNumBedroomsOnClick = this.handleNumBedroomsOnClick.bind(this)
+		this.handleNumBedroomsSelected = this.handleNumBedroomsSelected.bind(this)
+
 		this.updateAcquisitionType = this.updateAcquisitionType.bind(this)
 		// this.toggleShowLocations = this.toggleShowLocations.bind(this)
 		this.hideLocations = this.hideLocations.bind(this)
@@ -37,7 +40,7 @@ export default class SearchForm extends Component {
 			showNumBedroomOptions: false,
 			showPriceTypeOptions: false,
 			showPropertyTypeOptions: false,
-			showAcquisitionTypeOptions: true,
+			showAcquisitionTypeOptions: false,
 
 			showNumBedroomTypes: true,
 			showLocation: true,
@@ -126,6 +129,30 @@ export default class SearchForm extends Component {
 		}
 	}
 
+	handleNumBedroomsOnClick() {
+		this.setState({
+			showNumBedroomOptions: true,
+			showPropertyTypes: false,
+			showLocation: false,
+			showPriceTypes: false,
+			showPriceValue: false,
+			showOptions: true,
+		})
+	}
+
+	handleNumBedroomsSelected(event) {
+		console.log(event.target.value)
+		this.setState({
+			queryNumBedroomsText: event.target.innerHTML,
+			showPropertyTypes: true,
+			showLocation: true,
+			showPriceTypes: true,
+			showPriceValue: true,
+			showOptions: false,
+			showNumBedroomOptions: false,
+		})
+	}
+
 	//todo: remove
 	hideLocations(event) {
 		this.setState({
@@ -165,7 +192,7 @@ export default class SearchForm extends Component {
 	render() {
 		return (
 			<div>
-				<span className="form">
+				<span className="form text-center">
 					<h3>
 						{"I’d like to "}
 						<span
@@ -178,8 +205,10 @@ export default class SearchForm extends Component {
 						{" a  "}
 						{this.state.showNumBedroomTypes ? (
 							<span>
-								
-								<span className="form-select green-text">
+								<span
+									className="form-select green-text"
+									onClick={this.handleNumBedroomsOnClick}
+								>
 									{this.state.queryNumBedroomsText}{" "}
 									<Fa icon="angle-down green-text" />
 								</span>
@@ -240,10 +269,13 @@ export default class SearchForm extends Component {
 								showPriceTypes={this.state.showPriceTypeOptions}
 								showLocations={this.state.showLocationOptions}
 								handleAcqTypeClick={this.handleAcqTypeSelected}
+								handleNumBedroomsClick={this.handleNumBedroomsSelected}
 							/>
 						) : (
 							""
 						)}
+						<br />
+						<br />
 						{this.state.showButton ? (
 							<SearchButton
 								acqType={this.state.queryAcquisitionType}

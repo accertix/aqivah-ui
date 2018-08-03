@@ -61,7 +61,7 @@ class App extends Component {
 									<br />
 									<div className="container">
 										<div className="row">
-											<div className="col-md-10">
+											<div className="col-12">
 												<br />
 												<Routes />
 											</div>

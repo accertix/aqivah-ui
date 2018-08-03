@@ -3,14 +3,15 @@ import Locations from "./Locations"
 
 const SearchFormOptions = props => {
 	return (
-		<div className="m-2 ">
+		<div className="m-1 ">
 			{props.showAcqTypes
 				? props.acqTypes.map(item => {
 						return (
-							<div className="form animated slideInDown" onClick={props.handleAcqTypeClick}>
-								<b>{item}</b>
-								<br />
-								<br />
+							<div
+								className="form animated slideInDown"
+								onClick={props.handleAcqTypeClick}
+							>
+								{item}
 							</div>
 						)
 				  })
@@ -19,10 +20,12 @@ const SearchFormOptions = props => {
 			{props.showNumBedroomTypes
 				? props.numBedrooms.map(item => {
 						return (
-							<div className="form animated slideInDown">
-								<b>{item}</b>
-								<br />
-								<br />
+							<div
+								className="form animated slideInDown"
+								value="1"
+								onClick={props.handleNumBedroomsClick}
+							>
+								{item}
 							</div>
 						)
 				  })
@@ -31,9 +34,7 @@ const SearchFormOptions = props => {
 				? props.propertyTypes.map(item => {
 						return (
 							<div className="form animated slideInDown">
-								<b>{item}</b>
-								<br />
-								<br />
+								{item}
 							</div>
 						)
 				  })
@@ -42,9 +43,7 @@ const SearchFormOptions = props => {
 				? props.priceTypes.map(item => {
 						return (
 							<div className="form animated slideInDown">
-								<b>{item}</b>
-								<br />
-								<br />
+								{item}
 							</div>
 						)
 				  })
