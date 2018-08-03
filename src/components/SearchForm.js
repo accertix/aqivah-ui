@@ -12,8 +12,12 @@ import SearchButton from "./SearchButton"
 import Header from "./Header"
 import SearchFormOptions from "./SearchFormOptions"
 
-//todo: send state values in array to db, so admin can easily update.
+/**
+ * todo: rewrite toggles for the various forms as individual toggle functions, which only change the value of the switch based on relevant conditions. eg: showNumBedroomTypes should only be true when property type is house, and acqType is not sell. things like these...
+ * 
+ * todo: state options should be from db, so they can easily be updated from admin panel, without changing code.
 
+*/
 export default class SearchForm extends Component {
 	constructor(props) {
 		super(props)
@@ -23,6 +27,9 @@ export default class SearchForm extends Component {
 
 		this.handleNumBedroomsOnClick = this.handleNumBedroomsOnClick.bind(this)
 		this.handleNumBedroomsSelected = this.handleNumBedroomsSelected.bind(this)
+
+		this.handlePropertyTypeOnClick = this.handlePropertyTypeOnClick.bind(this)
+		this.handlePropertyTypeSelected = this.handlePropertyTypeSelected.bind(this)
 
 		this.updateAcquisitionType = this.updateAcquisitionType.bind(this)
 		// this.toggleShowLocations = this.toggleShowLocations.bind(this)
@@ -141,7 +148,6 @@ export default class SearchForm extends Component {
 	}
 
 	handleNumBedroomsSelected(event) {
-		console.log(event.target.value)
 		this.setState({
 			queryNumBedroomsText: event.target.innerHTML,
 			showPropertyTypes: true,
@@ -151,6 +157,38 @@ export default class SearchForm extends Component {
 			showOptions: false,
 			showNumBedroomOptions: false,
 		})
+	}
+
+	handlePropertyTypeOnClick() {
+		this.setState({
+			showPropertyTypeOptions: true,
+			showLocation: false,
+			showPriceTypes: false,
+			showPriceValue: false,
+			showOptions: true,
+		})
+	}
+
+	handlePropertyTypeSelected(event) {
+		const isHouse = event.target.innerHTML == "House"
+		console.log(isHouse)
+		if (this.state.queryAcquisitionType == "Sell") {
+			this.setState({
+				queryPropertyType: event.target.innerHTML,
+				showPropertyTypeOptions: false,
+				showOptions: false,
+			})
+		} else {
+			this.setState({
+				queryPropertyType: event.target.innerHTML,
+				showPropertyTypeOptions: false,
+				showLocation: true,
+				showPriceTypes: true,
+				showPriceValue: true,
+				showOptions: false,
+				showNumBedroomTypes: isHouse,
+			})
+		}
 	}
 
 	//todo: remove
@@ -217,7 +255,10 @@ export default class SearchForm extends Component {
 							""
 						)}{" "}
 						{this.state.showPropertyTypes ? (
-							<span className="form-select green-text">
+							<span
+								className="form-select green-text"
+								onClick={this.handlePropertyTypeOnClick}
+							>
 								{this.state.queryPropertyType}{" "}
 								<Fa icon="angle-down green-text" />
 							</span>
@@ -270,6 +311,7 @@ export default class SearchForm extends Component {
 								showLocations={this.state.showLocationOptions}
 								handleAcqTypeClick={this.handleAcqTypeSelected}
 								handleNumBedroomsClick={this.handleNumBedroomsSelected}
+								handlePropertyTypeClick={this.handlePropertyTypeSelected}
 							/>
 						) : (
 							""

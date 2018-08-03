@@ -1,5 +1,5 @@
 import React from "react"
-import { Button } from "mdbreact"
+import { Button, Fa } from "mdbreact"
 import { Link } from "react-router-dom"
 import PATHS from "./pathConstants"
 
@@ -20,7 +20,7 @@ const SearchButton = props => {
 			}}
 		>
 			<Button className="btn-lg" color="success">
-				{"Next"}
+				{"Next"} <Fa icon="angle-right" />
 			</Button>
 		</Link>
 	)

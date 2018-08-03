@@ -33,7 +33,7 @@ const SearchFormOptions = props => {
 			{props.showPropertyTypes
 				? props.propertyTypes.map(item => {
 						return (
-							<div className="form animated slideInDown">
+							<div className="form animated slideInDown" onClick={props.handlePropertyTypeClick}>
 								{item}
 							</div>
 						)
