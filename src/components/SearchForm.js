@@ -31,6 +31,9 @@ export default class SearchForm extends Component {
 		this.handlePropertyTypeOnClick = this.handlePropertyTypeOnClick.bind(this)
 		this.handlePropertyTypeSelected = this.handlePropertyTypeSelected.bind(this)
 
+		this.handlePriceTypeOnClick = this.handlePriceTypeOnClick.bind(this)
+		this.handlePriceTypeSelected = this.handlePriceTypeSelected.bind(this)
+
 		this.updateAcquisitionType = this.updateAcquisitionType.bind(this)
 		// this.toggleShowLocations = this.toggleShowLocations.bind(this)
 		this.hideLocations = this.hideLocations.bind(this)
@@ -171,7 +174,7 @@ export default class SearchForm extends Component {
 
 	handlePropertyTypeSelected(event) {
 		const isHouse = event.target.innerHTML == "House"
-		console.log(isHouse)
+
 		if (this.state.queryAcquisitionType == "Sell") {
 			this.setState({
 				queryPropertyType: event.target.innerHTML,
@@ -189,6 +192,23 @@ export default class SearchForm extends Component {
 				showNumBedroomTypes: isHouse,
 			})
 		}
+	}
+
+	handlePriceTypeOnClick() {
+		this.setState({
+			showPriceValue: false,
+			showOptions: true,
+			showPriceTypeOptions: true,
+		})
+	}
+
+	handlePriceTypeSelected(event) {
+		this.setState({
+			queryPriceType: event.target.innerHTML,
+			showPriceValue: true,
+			showOptions: false,
+			showPriceTypeOptions: false,
+		})
 	}
 
 	//todo: remove
@@ -278,7 +298,7 @@ export default class SearchForm extends Component {
 						{this.state.showPriceTypes ? (
 							<span>
 								{" for "}
-								<span className="form-select green-text fa-sm">
+								<span className="form-select green-text fa-sm" onClick={this.handlePriceTypeOnClick}>
 									{this.state.queryPriceType}{" "}
 									<Fa icon="angle-down green-text" />
 								</span>
@@ -312,6 +332,7 @@ export default class SearchForm extends Component {
 								handleAcqTypeClick={this.handleAcqTypeSelected}
 								handleNumBedroomsClick={this.handleNumBedroomsSelected}
 								handlePropertyTypeClick={this.handlePropertyTypeSelected}
+								handlePriceTypeClick={this.handlePriceTypeSelected}
 							/>
 						) : (
 							""
