@@ -338,7 +338,7 @@ export default class SearchForm extends Component {
 							""
 						)}
 						<br />
-						<br />
+						
 						{this.state.showButton ? (
 							<SearchButton
 								acqType={this.state.queryAcquisitionType}

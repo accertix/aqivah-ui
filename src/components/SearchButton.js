@@ -19,8 +19,9 @@ const SearchButton = props => {
 				},
 			}}
 		>
-			<Button className="btn-lg" color="success">
-				{"Next"} <Fa icon="angle-right" />
+			
+			<Button className="btn" color="success">
+				{"Next "}<Fa icon="angle-right" />
 			</Button>
 		</Link>
 	)

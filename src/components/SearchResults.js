@@ -135,7 +135,7 @@ export default class SearchResults extends Component {
 					if (error) return "error"
 
 					return (
-						<div>
+						<div className="col-md-4" style={{padding:"0px"}}>
 							<h5>
 								<b>Search Results </b>
 							</h5>
